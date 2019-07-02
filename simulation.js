@@ -1,4 +1,5 @@
-
+var fs = require("fs");
+const axios = require('axios');
 
 let simulations = process.argv[2];
 
@@ -42,6 +43,25 @@ const nothingMin = itemMax + 1; // 7500 + 1 = 7501
 const nothingMax = (rollMax * nothingProb) + itemMax; // (10000 * 0.25) + 7500 = 10000
 console.log("Nothing: " + nothingMin + " to " + nothingMax);
 
+getCoin = (coinId) => {
+    axios.get('https://api.coingecko.com/api/v3/coins/' + coinId)
+    .then(function (response) {
+        // handle success
+        coinPrice = response.data.market_data.current_price.usd
+        console.log(coinId + ": " + coinPrice);
+      })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+    // .finally(function () {
+    //     // always executed
+    //     console.log("finally")
+    // });
+  }
+
+
+
 playRoll = (min,max) => {
     return Math.floor(Math.random() * max) + min;
 }
@@ -71,8 +91,9 @@ coinRoll = () => {
     const coins = ["bitcoin","ethereum","ripple","dogecoin","litecoin"];
     const coinIndex = Math.floor(Math.random() * coins.length)
     const randomCoin = coins[coinIndex];
+    getCoin(randomCoin);
     
-    let winAmount = (Math.random() * (0.01 - 0.0001) + 0.0001).toFixed(4)
+    let winAmount = (Math.random() * (0.0075 - 0.0001) + 0.0001).toFixed(4)
 
     console.log(" - " + winAmount + " USD in " + randomCoin + " (Id: " + coinIndex + ") ");
 
