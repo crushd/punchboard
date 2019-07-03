@@ -54,13 +54,11 @@ getCoin = (coinId) => {
         // handle error
         console.log(error);
       })
-    // .finally(function () {
-    //     // always executed
-    //     console.log("finally")
-    // });
-  }
-
-
+// .finally(function () {
+//     // always executed
+//     console.log("finally")
+// });
+}
 
 playRoll = (min,max) => {
     return Math.floor(Math.random() * max) + min;
@@ -68,12 +66,11 @@ playRoll = (min,max) => {
 
 buffRoll = () => {
 
-    const buffs = ["bonusHeart","doubleSatoshi","reduceTransferFee50"];
+    const buffs = ["bonusHeart","satoshi005","satoshi010","reduceTransferFee005","reduceTransferFee010"];
     const buffIndex = Math.floor(Math.random() * buffs.length)
     const randomBuff = buffs[buffIndex];
 
     console.log(" - " + randomBuff + " (Id: " + buffIndex + ") ");
-
 }
 
 objectRoll = () => {
@@ -83,7 +80,6 @@ objectRoll = () => {
     const randomObject = objects[objectIndex];
 
     console.log(" - " + randomObject + " (Id: " + objectIndex + ") ");
-
 }
 
 coinRoll = () => {
@@ -96,7 +92,6 @@ coinRoll = () => {
     let winAmount = (Math.random() * (0.0075 - 0.0001) + 0.0001).toFixed(4)
 
     console.log(" - " + winAmount + " USD in " + randomCoin + " (Id: " + coinIndex + ") ");
-
 }
 
 itemDrop = () => {
@@ -106,15 +101,12 @@ itemDrop = () => {
 
     if (itemRoll >= 1 && itemRoll <= 8500) {
         console.log("-- A Shiny Object!")
-        //console.log(itemRoll)
         objectRoll();
     } else if (itemRoll > 8501 && itemRoll <= 9750) {
         console.log("-- Some Coin!")
-        //console.log(itemRoll)
         coinRoll();
     } else {
         console.log("-- A rare buff!")
-        //console.log(itemRoll)
         buffRoll();
     }
 
@@ -163,7 +155,12 @@ itemDrop = () => {
             console.log("Something else happened.")
         }
 
-        console.log("Your Health: " + health);    
+        console.log("Your Health: " + health);
+
+        if (health === 0) {
+            console.log("Game over.");
+            console.log("");
+        }
     }
 }
 
